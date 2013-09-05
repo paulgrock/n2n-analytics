@@ -15,6 +15,7 @@ reports
 .sass-cache
 node_modules
 public/vendor
+db/mongo_data
 
 # Sublime project files
 *.sublime-project
