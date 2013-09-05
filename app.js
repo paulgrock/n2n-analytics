@@ -3,10 +3,11 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , http = require('http')
-  , path = require('path');
+var express = require('express'),
+    routes = require('./routes'),
+    http = require('http'),
+    path = require('path'),
+    mongoose = require('mongoose');
 
 var app = express();
 
@@ -28,6 +29,15 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+var connectToMongo = function(cb){
+  mongoose.connect('mongodb://localhost/anaytics');
+  mongoose.connection.on('open', function(){
+    console.log('connected to mongodb://localhost/anaytics');
+    cb();
+  })
+}
+connectToMongo(function(){
+  http.createServer(app).listen(app.get('port'), function(){
+    console.log('Express server listening on port ' + app.get('port'));
+  });
+})

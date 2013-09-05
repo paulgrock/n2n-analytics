@@ -3,10 +3,6 @@ module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   // Project configuration.
   grunt.initConfig({
-    // Metadata.
-    shaSub: function(sha){
-      return sha.substring(sha.length - 7);
-    },
     jsDir: "public/javascripts",
     stylesDir: "public/stylesheets",
     jshint: {
@@ -32,11 +28,6 @@ module.exports = function(grunt) {
       },
       dev: {
         outputStyle: 'nested'
-      },
-      prod: {
-        cssDir: 'public/<%= shaSub(commitSHA) %>/styles',
-        environment: 'production',
-        outputStyle: 'compressed'
       }
     },
     express: {
@@ -78,36 +69,6 @@ module.exports = function(grunt) {
           src: '{,*/}*.{png,jpg,jpeg}',
           dest: 'public/images'
         }]
-      }
-    },
-    'git-describe':  {
-      options: {
-        prop: 'commitSHA',
-        dirtyMark: ''
-      },
-      target: {
-      }
-    },
-    sftp: {
-      options: {
-      },
-      createDirs: {
-        files: {
-          './': '<%= requirejs.prod.options.dir %>/**/*.js'
-        }
-      },
-      js: {
-        options: {
-          createDirectories: false,
-        },
-        files: {
-          './': '<%= requirejs.prod.options.dir %>/**/*.js'
-        }
-      },
-      css: {
-        files: {
-          './': '<%= compass.prod.options.cssDir %>/**/*.css'
-        }
       }
     },
     bower: {
