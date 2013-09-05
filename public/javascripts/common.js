@@ -30,13 +30,4 @@ require([
   'helpers/handlebars'
 ], function (Ember, router, postController, postsRoute, postRoute, hbs) {
   'use strict';
-
-  window.App = Ember.Application.create();
-  router.setupPushState();
-  router.map();
-  postsRoute.fetch();
-  postRoute.fetch();
-  postController.start();
-  hbs.formatDate();
-  hbs.formatMarkdown();
 });
