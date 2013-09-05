@@ -22,12 +22,7 @@ require.config({
 
 //files to include on ALL client side paths
 require([
-  'ember',
-  'routers/main',
-  'controllers/post-controller',
-  'routes/posts',
-  'routes/post',
-  'helpers/handlebars'
-], function (Ember, router, postController, postsRoute, postRoute, hbs) {
+  'ember'
+], function (Ember) {
   'use strict';
 });
